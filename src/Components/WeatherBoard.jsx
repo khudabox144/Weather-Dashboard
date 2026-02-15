@@ -1,24 +1,22 @@
-// WeatherApp.jsx
-import React from "react";
 import WeatherHeadline from "./WeatherHeadline";
 import AddToFavourite from "./AddToFavourite";
 import WeatherCondtion from "./WeatherCondtion";
 
 const WeatherBoard = () => {
-
-	
-
 	return (
-    <div className="container mx-auto px-4">
-      <div className="grid bg-black/20 rounded-xl backdrop-blur-md border border-white/20 px-4 md:px-8 lg:px-14 py-6 md:py-10 min-h-[520px] max-w-[1058px] mx-auto">
-        <div className="grid md:grid-cols-2 gap-6 md:gap-8">
-          <AddToFavourite />
-          <WeatherHeadline />
-          <WeatherCondtion />
-        </div>
-      </div>
-    </div>
-  );
+		<div className="container mx-auto max-w-5xl animate-fade-in-up">
+			<div className="glass-card px-5 py-6 sm:px-8 sm:py-8 md:px-10 md:py-10 lg:px-14 lg:py-12">
+				{/* Top bar: favourite button */}
+				<AddToFavourite />
+
+				{/* Main content: headline + conditions */}
+				<div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 mt-6">
+					<WeatherHeadline />
+					<WeatherCondtion />
+				</div>
+			</div>
+		</div>
+	);
 };
 
 export default WeatherBoard;

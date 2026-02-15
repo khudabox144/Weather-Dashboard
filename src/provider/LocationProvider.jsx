@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { searchLocationContext } from '../context';
 const LocationProvider = ({children}) => {
     const [selectedLocation,setSelectedLocation]=useState("");

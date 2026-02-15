@@ -12,11 +12,7 @@ function App() {
     <LocationProvider>
       <WeatherProvider>
         <AddtoFavProvider>
-          <>
-            <div>
-              <Page />
-            </div>
-          </>
+          <Page />
         </AddtoFavProvider>
       </WeatherProvider>
     </LocationProvider>

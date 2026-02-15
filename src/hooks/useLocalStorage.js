@@ -13,7 +13,9 @@ const useLocalStorage = (storageKey, defaultValue) => {
   useEffect(() => {
     try {
       localStorage.setItem(storageKey, JSON.stringify(value));
-    } catch {}
+    } catch {
+      // localStorage may be unavailable (e.g., private browsing mode)
+    }
   }, [value, storageKey]);
 
   return [value, setValue];

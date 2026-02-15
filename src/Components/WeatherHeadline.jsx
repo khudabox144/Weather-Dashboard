@@ -1,57 +1,64 @@
 // WeatherHeadline.jsx
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { weatherContext } from "../context";
-
-import CloudIcon from "/public/assets/cloud.svg";
-import HazeIcon from "/public/assets/haze.svg";
-import SnowIcon from "/public/assets/icons/snow.svg";
-import SunnyIcon from "/public/assets/icons/sunny.svg";
-import RainIcon from "/public/assets/rainy.svg";
-import ThunderIcon from "/public/assets/thunder.svg";
 import { getFormattedDate } from "../utils/timezone";
 
 const WeatherHeadline = () => {
   const { weatherData } = useContext(weatherContext)
-  // console.log(weatherData);
+
   const getWeatherIcon = (climate) => {
     switch (climate) {
       case "Rain":
-        return RainIcon;
+        return "/assets/rainy.svg";
       case "Clouds":
-        return CloudIcon;
+        return "/assets/cloud.svg";
       case "Clear":
-        return SunnyIcon;
+        return "/assets/icons/sunny.svg";
       case "Snow":
-        return SnowIcon;
+        return "/assets/icons/snow.svg";
       case "Thunder":
-        return ThunderIcon;
+        return "/assets/thunder.svg";
       case "Fog":
-        return HazeIcon;
       case "Haze":
-        return HazeIcon;
       case "Mist":
-        return HazeIcon;
-
+        return "/assets/haze.svg";
       default:
-        return SunnyIcon;
+        return "/assets/icons/sunny.svg";
     }
   }
 
   return (
-    <div>
-  <div className="flex flex-col md:flex-row md:items-center md:justify-between max-md:space-y-4">
-    <img src={getWeatherIcon(weatherData.climate)} alt="cloud" className="w-20 h-20 md:w-24 md:h-24 lg:w-32 lg:h-32" />
-    <div className="flex flex-col md:flex-row md:items-center md:space-x-4">
-      <h1 className="text-[48px] md:text-[60px] lg:text-[80px] xl:text-[100px] leading-none font-bold">{Math.round(weatherData.temperature)}°</h1>
-      <div className="flex items-center space-x-2 md:space-x-4 mt-2 md:mt-0">
-        <img src="./assets/pin.svg" className="w-5 h-5 md:w-6 md:h-6" />
-        <h2 className="text-xl md:text-2xl lg:text-4xl font-semibold">{weatherData.location}</h2>
+    <div className="flex flex-col justify-between h-full">
+      {/* Weather icon + temperature */}
+      <div className="flex items-center gap-4 md:gap-6">
+        <div className="flex-shrink-0 glass-card-light !rounded-2xl p-3 md:p-4">
+          <img
+            src={getWeatherIcon(weatherData.climate)}
+            alt={weatherData.climate}
+            className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 drop-shadow-lg"
+          />
+        </div>
+        <div>
+          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold leading-none tracking-tight">
+            {Math.round(weatherData.temperature)}<span className="text-3xl sm:text-4xl md:text-5xl font-light align-top ml-1">°C</span>
+          </h1>
+          <p className="text-white/50 text-xs sm:text-sm mt-1 font-medium uppercase tracking-wider">
+            {weatherData.climate || "--"}
+          </p>
+        </div>
+      </div>
+
+      {/* Location & date */}
+      <div className="mt-6 md:mt-8">
+        <div className="flex items-center gap-2">
+          <img src="/assets/pin.svg" className="w-5 h-5 opacity-70" alt="location" />
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight">{weatherData.location}</h2>
+        </div>
+        <p className="text-white/50 text-xs sm:text-sm mt-2 font-light">
+          {getFormattedDate(weatherData.time, "time", false)} &mdash; {getFormattedDate(weatherData.time, "date", false)}
+        </p>
       </div>
     </div>
-  </div>
-  <p className="text-xs md:text-sm lg:text-base mt-2">{getFormattedDate(weatherData.time, "time", false)} - {getFormattedDate(weatherData.time, "date", false)}</p>
-</div>
-
   );
 };
 

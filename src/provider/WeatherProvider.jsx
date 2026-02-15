@@ -1,7 +1,6 @@
 
-import React from 'react';
 import { weatherContext } from '../context';
-import useWeather from '../Hooks/useWeather';
+import useWeather from '../hooks/useWeather';
 
 
 const WeatherProvider = ({ children }) => {
